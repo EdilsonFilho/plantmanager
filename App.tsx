@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View} from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { UserIdentification } from './src/pages/Useridentification';
+//import { UserIdentification } from './src/pages/Useridentification';
+import { Confirmation } from './src/pages/Confirmation';
 import {
   useFonts,
   Jost_400Regular,
@@ -21,7 +22,7 @@ export default function App() {
     )
   
   return (
-    <UserIdentification />
+    <Confirmation />
   )
 }
 
