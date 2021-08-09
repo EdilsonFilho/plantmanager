@@ -8,10 +8,9 @@ import {
 } from 'react-native';
 
 import { EnviromentButton } from '../components/EnviromentButton';
-
-
 import { Header} from '../components/Header';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
+import { Load } from '../components/Load';
 
 import api from '../services/api';
 
@@ -41,6 +40,7 @@ export function PlantSelect(){
     const [plants, setPlants] = useState<PlantProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
     const [enviromentSelected, setEnviromentSelected] = useState('all');
+    const [loading, setLoading] = useState(true);
 
     function handleEnviromentSelected(enviroment: string){
         setEnviromentSelected(enviroment);
@@ -74,11 +74,15 @@ export function PlantSelect(){
         async function fetchPlants(){
             const { data } = await api.get('plants?_sort=name&_order=asc');
             setPlants(data);
+            setFilteredPlants(data);
+            setLoading(false);
         }
         fetchPlants();
     },[])
 
-     return(
+    if(loading)
+        return <Load /> 
+    return(
         <View style={styles.container}>
             <View style={styles.header}>
                 <Header />
